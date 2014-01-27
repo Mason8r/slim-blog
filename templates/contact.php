@@ -39,8 +39,8 @@
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li><a href="/">Home</a></li>
-          <li class="active"><a href="#" >About</a></li>
-          <li><a href="contact">Contact</a></li>
+          <li><a href="/about" >About</a></li>
+          <li class="active"><a href="/contact">Contact</a></li>
         </ul>
         <h3 class="text-muted">stuartmason.co.uk</h3>
       </div>
@@ -52,7 +52,10 @@
 
       <div class="row">
         <div class="col-lg-12">
-          <p>Few more words about me.</p>
+          <form method="post" action="contact" >
+            <label for="name">Name</label>
+            <input type="type" name="text">
+          </form>
         </div>
       </div>
 

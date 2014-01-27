@@ -18,9 +18,42 @@ $app->config(array(
 $app->get('/', function() use ($app, $blog){
    
 
+   $heading = "Hello you, I'm Stu";
+   $message = "I try and make the internet happen.";
    $articles = $blog->loadArticles();
 
-   $app->render('index.php',array('articles' => $articles));
+   $app->render('index.php',array('articles' => $articles,'message' => $message, 'heading' => $heading));
+
+});
+
+$app->get('/about', function() use ($app, $blog){
+   
+
+   $heading = "It's all about Stu";
+   $message = "It's all about Stu baby...";
+
+   $app->render('about.php',array('message' => $message, 'heading' => $heading));
+
+});
+
+$app->get('/contact', function() use ($app, $blog){
+   
+
+   $heading = "Say Hello back";
+   $message = "I'd love to hear from you.";
+
+   $app->render('contact.php',array('message' => $message, 'heading' => $heading));
+
+});
+
+$app->get('/', function() use ($app, $blog){
+   
+
+   $heading = "Hello you, I'm Stu";
+   $message = "I try and make the internet happen.";
+   $articles = $blog->loadArticles();
+
+   $app->render('index.php',array('articles' => $articles,'message' => $message, 'heading' => $heading));
 
 });
 
