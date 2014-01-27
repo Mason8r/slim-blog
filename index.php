@@ -1,6 +1,6 @@
 <?php 
 
-require 'Controllers/Blog.php';
+require 'controllers/Blog.php';
 
 require 'vendor/autoload.php';
 
