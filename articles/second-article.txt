@@ -1,0 +1,8 @@
+{
+   "title" : "This is my second article",
+   "date"  : "26/01/2014",
+   "slug"  : "second-article",
+   "author": "Stu Mason"
+}
+
+Jelly-o halvah marshmallow bonbon. Croissant candy canes chocolate cake muffin jelly beans liquorice.... (copy paste some lipsum)

@@ -1,0 +1,12 @@
+{
+   "title" : "This is my first article",
+   "date"  : "26/01/2014",
+   "slug"  : "first-article",
+   "author": "Stu Mason"
+}
+
+###Fruitcake jelly-o halvah marshmallow bonbon. 
+Croissant candy canes chocolate cake muffin jelly beans liquorice.... (copy paste some lipsum)
+	
+	This is code
+	This is what code looks like
