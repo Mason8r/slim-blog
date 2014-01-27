@@ -14,7 +14,7 @@ Class Blog
    $path = $this->app->config('article.path');
 
    $dir = new DirectoryIterator($path);
-   
+
    $articles = array();
    foreach($dir as $file){
       if($file->isFile()){
@@ -33,6 +33,57 @@ Class Blog
 
 	}
 
-}
 
+
+
+ public function createArchives($args,$articles)
+ {
+ 	
+
+  	$archives = array();
+	// check count($args) for optional route params
+	if(count($args)>0) {
+
+
+	  $dateFormat = function($args,$format){
+      	$temp_date = is_array($args) ? implode('-', $args) : $args;
+      	$date   = new DateTime($temp_date);
+      	return $date->format($format);
+   		};
+   
+
+   		switch(count($args)){
+      		case 1 :    //only year is present
+         		$format = 'Y';
+         		$date = $dateFormat($args,$format);
+         	break;
+      		case 2 :    //year and month are present
+         		$format = 'Y-m';
+         		$date	= $dateFormat($args,$format);
+         	break;
+      		case 3 : //year, month and date are present
+         		$format = 'Y-m-d';
+         		$date = $dateFormat($args,$format);
+         	break;
+   		}
+
+
+
+   		// filter articles
+   		foreach($articles as $article){
+     		if($dateFormat($article['meta']['date'], $format) == $date){
+         		$archives[] = $article;
+      		}
+   		}
+
+	} else {
+
+	$archives = $articles;
+
+	}
+
+	return $archives;
+ }
+
+}
 ?>

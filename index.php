@@ -27,51 +27,18 @@ $app->get('/', function() use ($app, $blog){
 
 $app->get('/archives(/:yyyy(/:mm(/:dd)))', function() use ($app,$blog) {
 
+   $args = func_get_args();
+   //load all articles
 
-$args = func_get_args();
-//load all articles
+   $articles = $blog->loadArticles();
 
-$articles = $blog->loadArticles();
+   $archives = $blog->createArchives( $args , $articles );
 
-$archives = array();
-// check count($args) for optional route params
-if(count($args)>0) {
-   switch(count($args)){
-      case 1 :    //only year is present
-         $format = 'Y';
-         $date = $dateFormat($args,$format);
-         break;
-      case 2 :    //year and month are present
-         $format = 'Y-m';
-         $date = $dateFormat($args,$format);
-         break;
-      case 3 : //year, month and date are present
-         $format = 'Y-m-d';
-         $date = $dateFormat($args,$format);
-         break;
-   }
-   // filter articles
-   foreach($articles as $article){
-      if($dateFormat($article['meta']['date'], $format) == $date){
-         $archives[] = $article;
-      }
-   }
-}
-else {
+   // render archives
+   $app->render('archives.php',array('archives' => $archives));
 
-   $archives = $articles;
-   
-}
 
-// render archives
-$app->render('archives.php',array('archives' => $archives));
 
-$dateFormat = function($args,$format){
-   $temp_date = is_array($args) ? implode('-', $args) : $args;
-   $date   = new DateTime($temp_date);
-   return $date->format($format);
-
-};
 
 $app->get('/archives(/:yyyy(/:mm(/:dd)))', function() use ($app) {
 })->conditions(
@@ -100,6 +67,7 @@ $app->get('/:article',function($article) use ($app) {
    $content = implode("\n\n", $content);
    $content = Michelf\Markdown::defaultTransform($content);
    $article = array('meta' => $meta , 'content' => $content);
+
    $app->render('article.php', $article);
 
 });
